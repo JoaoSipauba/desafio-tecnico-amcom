@@ -1,3 +1,8 @@
 spring:
   application:
     name: desafio-tecnico-amcom
+
+  data:
+    mongodb:
+      uri: mongodb://root:password@localhost:27017/desafio-tecnico-amcom?authSource=admin
+      auto-index-creation: true
