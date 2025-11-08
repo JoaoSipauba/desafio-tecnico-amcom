@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,7 @@ public class CreateOrderService {
 
         Order order = this.mapToEntity(dto);
         order.setTotalValue(this.calculateTotal(order));
+        orderRepository.save(order);
     }
 
     private Order mapToEntity(CreateOrderRequest dto) {
@@ -41,6 +43,7 @@ public class CreateOrderService {
         return Order.builder()
                 .externalId(dto.externalId())
                 .items(items)
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 

@@ -19,7 +19,7 @@ public class FindOrderService {
 
     @Transactional(readOnly = true)
     public FindOrderResponse execute(String id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order not found"));
+        Order order = orderRepository.findByExternalId(id).orElseThrow(() -> new NotFoundException("Order not found"));
         return this.mapToResponse(order);
     }
 

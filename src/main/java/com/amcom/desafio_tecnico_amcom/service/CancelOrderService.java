@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class CancelOrderService {
@@ -16,11 +18,12 @@ public class CancelOrderService {
 
     @Transactional
     public void execute(String orderId) {
-        Order order = orderRepository.findById(orderId)
+        Order order = orderRepository.findByExternalId(orderId)
                 .orElseThrow(() -> new NotFoundException("Order not found with id: " + orderId));
 
         if (!OrderStatus.CANCELED.equals(order.getStatus())) {
             order.setStatus(OrderStatus.CANCELED);
+            order.setUpdatedAt(LocalDateTime.now());
             orderRepository.save(order);
         }
     }

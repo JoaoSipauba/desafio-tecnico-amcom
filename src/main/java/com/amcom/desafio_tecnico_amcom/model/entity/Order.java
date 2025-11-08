@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -27,11 +26,11 @@ public class Order {
     @Indexed(unique = true)
     private String externalId;
 
-    private OrderStatus status = OrderStatus.PENDING;
+    private OrderStatus status;
 
-    private BigDecimal totalValue = BigDecimal.ZERO;
+    private BigDecimal totalValue;
 
-    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderItem> items;
 
     @CreatedDate
     private LocalDateTime createdAt;

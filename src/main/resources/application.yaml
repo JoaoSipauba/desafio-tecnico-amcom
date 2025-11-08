@@ -6,3 +6,17 @@ spring:
     mongodb:
       uri: mongodb://root:password@localhost:27017/desafio-tecnico-amcom?authSource=admin
       auto-index-creation: true
+  kafka:
+    consumer:
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      batch-size: 65536
+    listener:
+      ack-mode: manual_immediate
+    bootstrap-servers: PLAINTEXT://localhost:9092
