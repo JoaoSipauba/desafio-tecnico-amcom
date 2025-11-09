@@ -6,7 +6,7 @@ import com.amcom.desafio_tecnico_amcom.model.dto.in.CreateOrderItemRequest;
 import com.amcom.desafio_tecnico_amcom.model.dto.in.CreateOrderRequest;
 import com.amcom.desafio_tecnico_amcom.model.enumeration.OrderEventType;
 import com.amcom.desafio_tecnico_amcom.service.CreateOrderService;
-import com.amcom.desafio_tecnico_amcom.stream.producer.ProcessedOrderProducer;
+import com.amcom.desafio_tecnico_amcom.stream.producer.OrderProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class CreateOrderCommand implements OrderCommand {
 
     private final CreateOrderService createOrderService;
-    private final ProcessedOrderProducer processedOrderProducer;
+    private final OrderProducer orderProducer;
 
     @Override
     public void execute(OrderEvent event) {
@@ -26,7 +26,7 @@ public class CreateOrderCommand implements OrderCommand {
         CreateOrderRequest request = mapToCreateOrderRequest(event);
         createOrderService.execute(request);
 
-        processedOrderProducer.sendProcessedOrderEvent(new ProcessedOrderEvent(event.getExternalId()));
+        orderProducer.sendProcessedOrderEvent(new ProcessedOrderEvent(event.getExternalId()));
     }
 
     private void validate(OrderEvent event) {

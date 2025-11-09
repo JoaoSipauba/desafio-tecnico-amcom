@@ -2,14 +2,18 @@ package com.amcom.desafio_tecnico_amcom.model.dto.out;
 
 import com.amcom.desafio_tecnico_amcom.model.enumeration.OrderStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FindOrderResponse {
 
     @Schema(description = "External ID of the order", example = "e3e6f88f-2f95-4bd0-8320-8ba18ab95ef8")

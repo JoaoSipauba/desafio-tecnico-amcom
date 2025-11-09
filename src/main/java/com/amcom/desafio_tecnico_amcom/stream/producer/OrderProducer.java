@@ -11,7 +11,7 @@ import static com.amcom.desafio_tecnico_amcom.support.constant.BrokerConstant.To
 
 @Component
 @RequiredArgsConstructor
-public class ProcessedOrderProducer {
+public class OrderProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
