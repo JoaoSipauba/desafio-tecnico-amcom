@@ -3,6 +3,7 @@ package com.amcom.desafio_tecnico_amcom.service;
 import com.amcom.desafio_tecnico_amcom.model.dto.in.CreateOrderRequest;
 import com.amcom.desafio_tecnico_amcom.model.entity.Order;
 import com.amcom.desafio_tecnico_amcom.model.entity.OrderItem;
+import com.amcom.desafio_tecnico_amcom.model.enumeration.OrderStatus;
 import com.amcom.desafio_tecnico_amcom.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class CreateOrderService {
 
         Order order = this.mapToEntity(dto);
         order.setTotalValue(this.calculateTotal(order));
+        order.setStatus(OrderStatus.PENDING);
         orderRepository.save(order);
     }
 
