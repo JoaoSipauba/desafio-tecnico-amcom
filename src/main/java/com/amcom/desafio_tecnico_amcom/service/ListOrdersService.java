@@ -23,9 +23,8 @@ public class ListOrdersService {
 
     private Page<ListOrdersResponse> mapToResponse(Page<Order> orders) {
         return orders.map(order -> ListOrdersResponse.builder()
-                .id(order.getId())
                 .externalId(order.getExternalId())
-                .status(order.getStatus().name())
+                .status(order.getStatus())
                 .totalValue(order.getTotalValue().toString())
                 .build());
     }

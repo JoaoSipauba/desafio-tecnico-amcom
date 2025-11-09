@@ -18,8 +18,8 @@ public class FindOrderService {
     private final OrderRepository orderRepository;
 
     @Transactional(readOnly = true)
-    public FindOrderResponse execute(String id) {
-        Order order = orderRepository.findByExternalId(id).orElseThrow(() -> new NotFoundException("Order not found"));
+    public FindOrderResponse execute(String externalId) {
+        Order order = orderRepository.findByExternalId(externalId).orElseThrow(() -> new NotFoundException("Order not found"));
         return this.mapToResponse(order);
     }
 
@@ -33,9 +33,8 @@ public class FindOrderService {
                 .toList();
 
         return FindOrderResponse.builder()
-                .id(order.getId())
                 .externalId(order.getExternalId())
-                .status(order.getStatus().name())
+                .status(order.getStatus())
                 .totalValue(order.getTotalValue().toString())
                 .items(items)
                 .createdAt(order.getCreatedAt())

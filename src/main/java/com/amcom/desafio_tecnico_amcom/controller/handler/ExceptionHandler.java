@@ -51,7 +51,7 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler({Exception.class})
     public ResponseEntity<ErrorResponse> handleException(Exception e, HttpServletRequest request) {
         log.error("Erro de infraestrutura do servico.", e);
-        ErrorResponse err = generateError(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        ErrorResponse err = generateError(request, HttpStatus.INTERNAL_SERVER_ERROR, "Erro de infraestrutura do servico.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.APPLICATION_JSON).body(err);
     }
 

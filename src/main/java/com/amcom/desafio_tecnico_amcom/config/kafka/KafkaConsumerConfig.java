@@ -1,4 +1,4 @@
-package com.amcom.desafio_tecnico_amcom.config;
+package com.amcom.desafio_tecnico_amcom.config.kafka;
 
 import com.amcom.desafio_tecnico_amcom.model.Event.OrderEvent;
 import org.springframework.context.annotation.Bean;

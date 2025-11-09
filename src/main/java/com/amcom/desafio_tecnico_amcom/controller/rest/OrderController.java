@@ -25,8 +25,8 @@ public class OrderController implements OrderResource {
     }
 
     @Override
-    public ResponseEntity<FindOrderResponse> findOrder(String id) {
-        FindOrderResponse response = findOrderService.execute(id);
+    public ResponseEntity<FindOrderResponse> findOrder(String externalId) {
+        FindOrderResponse response = findOrderService.execute(externalId);
         return ResponseEntity.ok(response);
     }
 }
