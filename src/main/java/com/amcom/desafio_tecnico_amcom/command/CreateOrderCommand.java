@@ -1,10 +1,12 @@
 package com.amcom.desafio_tecnico_amcom.command;
 
 import com.amcom.desafio_tecnico_amcom.model.Event.OrderEvent;
+import com.amcom.desafio_tecnico_amcom.model.Event.ProcessedOrderEvent;
 import com.amcom.desafio_tecnico_amcom.model.dto.in.CreateOrderItemRequest;
 import com.amcom.desafio_tecnico_amcom.model.dto.in.CreateOrderRequest;
 import com.amcom.desafio_tecnico_amcom.model.enumeration.OrderEventType;
 import com.amcom.desafio_tecnico_amcom.service.CreateOrderService;
+import com.amcom.desafio_tecnico_amcom.stream.producer.ProcessedOrderProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +18,15 @@ import java.util.List;
 public class CreateOrderCommand implements OrderCommand {
 
     private final CreateOrderService createOrderService;
+    private final ProcessedOrderProducer processedOrderProducer;
 
     @Override
     public void execute(OrderEvent event) {
         this.validate(event);
         CreateOrderRequest request = mapToCreateOrderRequest(event);
         createOrderService.execute(request);
+
+        processedOrderProducer.sendProcessedOrderEvent(new ProcessedOrderEvent(event.getExternalId()));
     }
 
     private void validate(OrderEvent event) {
