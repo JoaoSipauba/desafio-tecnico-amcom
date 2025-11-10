@@ -67,6 +67,9 @@ docker compose down -v
 
 Ao executar via Docker Compose, o endereço é o mesmo (porta 8080 mapeada para localhost).
 
+### Kafka UI
+- Dashboard: http://localhost:7777
+
 ### Local (sem Docker)
 1. Subir instâncias externas (MongoDB e Kafka) ou usar containers separados.
 2. Ajustar `application.yaml` se necessário.
