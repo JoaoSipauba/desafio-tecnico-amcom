@@ -25,15 +25,22 @@ public class OrderConsumer {
     @KafkaListener(topics = ORDER_EVENTS_TOPIC, groupId = GROUP_ID)
     public void listen(String message) {
         try {
-            log.info("Received message: {}", message);
+            log.info("Kafka message received. topic={}, groupId={}, payload={}", ORDER_EVENTS_TOPIC, GROUP_ID, message);
+
             OrderEvent event = objectMapper.readValue(message, OrderEvent.class);
+            log.debug("Deserialized OrderEvent successfully. eventType={}, externalId={}", event.getEventType(), event.getExternalId());
 
             OrderCommand command = commandMap.get(event.getEventType().toString());
-            command.execute(event);
+            if (command == null) {
+                log.warn("No command found for eventType={}", event.getEventType());
+                return;
+            }
 
-            log.info("Message processed and acknowledged: {}", message);
+            command.execute(event);
+            log.info("OrderEvent processed successfully. eventType={}, externalId={}", event.getEventType(), event.getExternalId());
+
         } catch (Exception e) {
-            log.error("Error processing message: {}", message, e);
+            log.error("Error processing Kafka message. topic={}, groupId={}, payload={}", ORDER_EVENTS_TOPIC, GROUP_ID, message, e);
             throw new RuntimeException(e);
         }
     }

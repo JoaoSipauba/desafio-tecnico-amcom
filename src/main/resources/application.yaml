@@ -46,3 +46,10 @@ springdoc:
     docExpansion: list
     syntax-highlight:
       activated: true
+
+logging:
+  level:
+    org.apache.kafka: WARN
+    org.apache.kafka.clients: WARN
+    org.apache.kafka.common.utils.AppInfoParser: ERROR
+    org.springframework.kafka: INFO

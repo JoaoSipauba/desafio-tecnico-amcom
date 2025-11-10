@@ -25,18 +25,18 @@ public class MongoInitializer implements CommandLineRunner {
         try {
             String dbName = mongoTemplate.getDb().getName();
             mongoTemplate.getDb().listCollectionNames();
-            log.debug("Database verified or created: {}", dbName);
+            log.debug("Database verified or created successfully: {}", dbName);
         } catch (Exception e) {
-            log.debug("Error verifying database: {}", e.getMessage());
+            log.debug("Error verifying or creating database: {}", e.getMessage());
         }
     }
 
     private void createCollectionIfNotExists() {
         if (!mongoTemplate.collectionExists("orders")) {
             mongoTemplate.createCollection("orders");
-            log.debug("Collection created: " + "orders");
+            log.debug("Collection created successfully: orders");
         } else {
-            log.debug("Collection already exists: " + "orders");
+            log.debug("Collection already exists: orders");
         }
     }
 }

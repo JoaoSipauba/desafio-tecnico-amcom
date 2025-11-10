@@ -22,36 +22,36 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {MissingRequestValueException.class})
     public ResponseEntity<ErrorResponse> handleBadRequest(Exception e, HttpServletRequest request) {
-        log.error("Erro de validacao de regra de negocio.", e);
+        log.error("Business rule validation error.", e);
         ErrorResponse err = generateError(request, HttpStatus.BAD_REQUEST, e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(err);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler({NotFoundException.class})
     public ResponseEntity<ErrorResponse> handleRecursoNaoEncontradoException(NotFoundException e, HttpServletRequest request) {
-        log.error("Recurso nao encontrado.", e);
+        log.error("Resource not found.", e);
         ErrorResponse err = generateError(request, HttpStatus.NOT_FOUND, e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body(err);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
-        log.error("Metodo/verbo HTTP nao suportado.", e);
+        log.error("HTTP method not supported.", e);
         ErrorResponse err = generateError(request, HttpStatus.METHOD_NOT_ALLOWED, e.getMessage());
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).contentType(MediaType.APPLICATION_JSON).body(err);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> tratarErroArgumentoInvalido(MethodArgumentNotValidException e, HttpServletRequest request) {
-        log.error("Dados invalidos.", e);
-        ErrorResponse err = generateError(request, HttpStatus.BAD_REQUEST, "Dados invalidos.");
+        log.error("Invalid data.", e);
+        ErrorResponse err = generateError(request, HttpStatus.BAD_REQUEST, "Invalid data.");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(err);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler({Exception.class})
     public ResponseEntity<ErrorResponse> handleException(Exception e, HttpServletRequest request) {
-        log.error("Erro de infraestrutura do servico.", e);
-        ErrorResponse err = generateError(request, HttpStatus.INTERNAL_SERVER_ERROR, "Erro de infraestrutura do servico.");
+        log.error("Service infrastructure error.", e);
+        ErrorResponse err = generateError(request, HttpStatus.INTERNAL_SERVER_ERROR, "Service infrastructure error.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.APPLICATION_JSON).body(err);
     }
 
