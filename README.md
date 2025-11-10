@@ -10,15 +10,16 @@ Aplicação desenvolvida como parte do processo seletivo para vaga Senior na AMC
 5. [Estrutura de Pastas](#5-estrutura-de-pastas-resumo)
 6. [Fluxo de Processamento dos Pedidos](#6-fluxo-de-processamento-dos-pedidos)
 7. [Desenho da solução - Diagrama de Componentes](#7-desenho-da-solução---diagrama-de-componentes)
-8. [Imagem da Problemática](#8-imagem-da-problemática)
-9. [Performance e Capacidade](#9-performance-e-capacidade)
-10. [Testes e Cobertura](#10-testes-e-cobertura)
-11. [Observabilidade e Resiliência](#11-observabilidade-e-resiliência)
-12. [Próximos Passos](#12-próximos-passos)
-13. [Integrações e Postman](#13-integrações-e-postman) ([Serviço A](docs/integrations/servico-a.md), [Serviço B](docs/integrations/servico-b.md), [Collection Postman](docs/postman/amcom.postman_collection.json))
+8. [Performance e Capacidade](#8-performance-e-capacidade)
+9. [Testes e Cobertura](#9-testes-e-cobertura)
+10. [Observabilidade e Resiliência](#10-observabilidade-e-resiliência)
+11. [Próximos Passos](#11-próximos-passos)
+12. [Integrações e Postman](#12-integrações-e-postman) ([Serviço A](docs/integrations/servico-a.md), [Serviço B](docs/integrations/servico-b.md), [Collection Postman](docs/postman/amcom.postman_collection.json))
 
 ## 1. Contexto do Desafio
 O sistema deve receber eventos de pedidos e persistir seu estado. Deve ser capaz de escalar para suportar de 150.000 a 200.000 requisições/dia, processando alterações de estado em tempo quase real.
+
+![Problemática](docs/architecture/problem-statement.png)
 
 ## 2. Arquitetura (MVC + Event-Driven)
 - Camada Controller: expõe endpoints REST para criação e consulta de pedidos.
@@ -107,15 +108,12 @@ Diagrama de componentes disponível na pasta `docs/architecture/`.
 
 ![Diagrama de Componentes](docs/architecture/diagrama-componentes.png)
 
-## 8. Imagem da Problemática
-![Problemática](docs/architecture/problem-statement.png)
-
-## 9. Performance e Capacidade
+## 8. Performance e Capacidade
 - Requisito: 150k a 200k requisições/dia.
 - Teste de carga (interno): ~1169 eventos de criação de pedidos por segundo.
 - Projeção diária teórica: 1169 * 86400 ≈ 100.8 milhões eventos/dia (capacidade excede requisito, margem para variação).
 
-## 10. Testes e Cobertura
+## 9. Testes e Cobertura
 Executar testes e relatório de cobertura:
 ```bash
 ./mvnw clean test jacoco:report
@@ -123,17 +121,17 @@ Executar testes e relatório de cobertura:
 Relatório: `target/site/jacoco/index.html`.
 Meta configurada: ≥ 90% de cobertura por classe (plugin JaCoCo no `pom.xml`).
 
-## 11. Observabilidade e Resiliência
+## 10. Observabilidade e Resiliência
 - Logs estruturados (SLF4J) para tracing básico.
 - DLQ para mensagens que excedem tentativas de processamento.
 - BackOff configurado (FixedBackOff) em listeners Kafka.
 - Estratégia de idempotência pelo uso de `externalId` na criação de pedidos.
 
-## 12. Próximos Passos
+## 11. Próximos Passos
 - Adicionar métricas (Micrometer + Prometheus).
 - Implementar testes de carga automatizados (Gatling ou k6).
 
-## 13. Integrações e Postman
+## 12. Integrações e Postman
 Foram adicionados exemplos de integração nos arquivos:
 - `docs/integrations/servico-a.md` (evento CREATE do Serviço A)
 - `docs/integrations/servico-b.md` (processamento e emissão de COMPLETE/CANCEL)
