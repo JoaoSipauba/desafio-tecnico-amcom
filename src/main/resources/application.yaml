@@ -13,7 +13,7 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://root:password@localhost:27017/desafio-tecnico-amcom?authSource=admin
+      uri: ${MONGODB_URI:mongodb://root:password@localhost:27017/desafio-tecnico-amcom?authSource=admin}
       auto-index-creation: true
   kafka:
     consumer:
@@ -28,7 +28,7 @@ spring:
       batch-size: 65536
     listener:
       ack-mode: manual_immediate
-    bootstrap-servers: PLAINTEXT://localhost:9092
+    bootstrap-servers: ${BOOTSTRAP_SERVERS:PLAINTEXT://localhost:9092}
 
 springdoc:
   api-docs:

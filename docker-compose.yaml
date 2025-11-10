@@ -70,6 +70,9 @@ services:
       - broker
     networks:
       - app_network
+    environment:
+        MONGODB_URI: mongodb://root:password@mongodb:27017/desafio-tecnico-amcom?authSource=admin
+        BOOTSTRAP_SERVERS: broker:9093
 
 networks:
   app_network:

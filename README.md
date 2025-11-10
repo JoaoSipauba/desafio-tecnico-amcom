@@ -61,6 +61,12 @@ Encerrar:
 docker compose down -v
 ```
 
+### Swagger/OpenAPI
+- Swagger UI: http://localhost:8080/swagger-ui.html (ou http://localhost:8080/swagger-ui/index.html)
+- OpenAPI JSON: http://localhost:8080/v3/api-docs
+
+Ao executar via Docker Compose, o endereço é o mesmo (porta 8080 mapeada para localhost).
+
 ### Local (sem Docker)
 1. Subir instâncias externas (MongoDB e Kafka) ou usar containers separados.
 2. Ajustar `application.yaml` se necessário.
