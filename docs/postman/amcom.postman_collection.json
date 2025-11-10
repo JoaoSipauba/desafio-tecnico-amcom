@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "771f1aac-0c99-45fb-9bd6-d326f0bb19af",
+		"name": "amcom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41833913"
+	},
+	"item": [
+		{
+			"name": "ListOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/v1/orders",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/v1/orders/:externalId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"v1",
+						"orders",
+						":externalId"
+					],
+					"variable": [
+						{
+							"key": "externalId",
+							"value": "e3e6f88f-2f95-4bd0-8320-8ba18ab95ef8"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
