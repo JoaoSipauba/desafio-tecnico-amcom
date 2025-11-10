@@ -3,19 +3,19 @@
 Aplicação desenvolvida como parte do processo seletivo para vaga Senior na AMCom. O objetivo é processar eventos de pedidos (criação, cancelamento e conclusão) assegurando alta capacidade diária (150k a 200k requisições) com arquitetura limpa, observabilidade e robustez.
 
 ## Sumário
-1. Contexto do Desafio
-2. Arquitetura (MVC + Event-Driven)
-3. Tecnologias e Bibliotecas
-4. Executando a Aplicação
-5. Estrutura de Pastas
-6. Fluxo de Processamento dos Pedidos
-7. Desenho da solução - Diagrama de Componentes
-8. Imagem da Problemática
-9. Performance e Capacidade
-10. Testes e Cobertura
-11. Observabilidade e Resiliência
-12. Próximos Passos
-13. Integrações e Postman
+1. [Contexto do Desafio](#1-contexto-do-desafio)
+2. [Arquitetura (MVC + Event-Driven)](#2-arquitetura-mvc--event-driven)
+3. [Tecnologias e Bibliotecas](#3-tecnologias-e-bibliotecas)
+4. [Executando a Aplicação](#4-executando-a-aplicação)
+5. [Estrutura de Pastas](#5-estrutura-de-pastas-resumo)
+6. [Fluxo de Processamento dos Pedidos](#6-fluxo-de-processamento-dos-pedidos)
+7. [Desenho da solução - Diagrama de Componentes](#7-desenho-da-solução---diagrama-de-componentes)
+8. [Imagem da Problemática](#8-imagem-da-problemática)
+9. [Performance e Capacidade](#9-performance-e-capacidade)
+10. [Testes e Cobertura](#10-testes-e-cobertura)
+11. [Observabilidade e Resiliência](#11-observabilidade-e-resiliência)
+12. [Próximos Passos](#12-próximos-passos)
+13. [Integrações e Postman](#13-integrações-e-postman) ([Serviço A](docs/integrations/servico-a.md), [Serviço B](docs/integrations/servico-b.md), [Collection Postman](docs/postman/amcom.postman_collection.json))
 
 ## 1. Contexto do Desafio
 O sistema deve receber eventos de pedidos e persistir seu estado. Deve ser capaz de escalar para suportar de 150.000 a 200.000 requisições/dia, processando alterações de estado em tempo quase real.
